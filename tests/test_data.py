@@ -18,9 +18,6 @@ py_dataset_test = torchvision.datasets.MNIST(
 
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# my_dataset_train = data.MNIST(os.getcwd(), train=True)
-# my_dataset_test = data.MNIST(os.getcwd(), train=False)
-
 my_dataset_train = data.MNIST(root, train=True)
 my_dataset_test = data.MNIST(root, train=False)
 
@@ -71,5 +68,3 @@ def test_DataLoader():
 
     assert np.isclose(my_images.data, py_images.squeeze().numpy()).all()
     assert np.isclose(my_labels.data, py_labels.numpy()).all()
-
-    

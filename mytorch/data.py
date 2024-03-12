@@ -85,7 +85,8 @@ class DataLoader:
     """
     A class for dataloaders in MyTorch.
 
-    This class provides an iterator over a given dataset, enabling easy access to batches of data for model training or evaluation. 
+    This class provides an iterator over a given dataset, enabling easy access 
+    to batches of data for model training or evaluation. 
 
     Attributes:
         dataset (Dataset): The dataset from which to load the data.
@@ -191,7 +192,7 @@ class MNIST(Dataset):
             >>> image, label = mnist_dataset[0]
     """
 
-    def __init__(self, root, train=False):
+    def __init__(self, root='.', train=False):
         self.train = train
         self.root = root
 
@@ -222,9 +223,11 @@ class MNIST(Dataset):
 
 def load_MNIST_data(file_path, images=False):
     """
-    Utility function for converting a compressed binary file containing MNIST images or labels into a Tensor object containing the data. 
+    Utility function for converting a compressed binary file containing MNIST 
+    images or labels into a Tensor object containing the data. 
     
-    If data contains images, returned image Tensors have shape 28 by 28, with each element (pixel) in the range [0,1].
+    If data contains images, returned image Tensors have shape 28 by 28, with 
+    each element (pixel) in the range [0,1].
     """
 
     # Decompress file

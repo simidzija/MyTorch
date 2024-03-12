@@ -60,7 +60,8 @@ class Tensor:
         transposition (transpose), cross entropy (cross_entropy), etc.
 
         Also supports various in-place operations, which don't allow for
-        backpropagation, including item assignment (__setitem__), zero assignment (zero_), in place addition (__iadd__), etc.
+        backpropagation, including item assignment (__setitem__), zero 
+        assignment (zero_), in place addition (__iadd__), etc.
 
     Examples:
         Creating and manipulating a tensor:
@@ -91,7 +92,11 @@ class Tensor:
 
     def __repr__(self):
         if self.requires_grad:
-            return f'tensor({self.data}, grad={self.grad}, requires_grad={self.requires_grad})'
+            return (
+                f'tensor({self.data}, '
+                f'grad={self.grad}, '
+                f'requires_grad={self.requires_grad})'
+            )
         # elif self.requires_grad:
         else:
             return f'tensor({self.data})'
@@ -119,17 +124,25 @@ class Tensor:
 
     def backward(self, gradient=None):
         if not self.requires_grad:
-            raise RuntimeError('Cannot call backward() on tensor with require_grad=False.')
+            raise RuntimeError(
+                'Cannot call backward() on tensor with require_grad=False.'
+            )
         
         if gradient is None:
             if self.numel() == 1:
                 gradient = ones_like(self)
             else:
-                raise RuntimeError('gradient must be specified when calling backward() on tensor with more than one element.')
+                raise RuntimeError(
+                    'gradient must be specified when calling backward() on '
+                    'tensor with more than one element.'
+                )
 
         # ensure correct shape for gradient
         if gradient.shape != self.shape:
-            raise RuntimeError(f'Mismatch in shape: grad_output has a shape of {gradient.shape} and output has a shape of {self.shape}.')
+            raise RuntimeError(
+                f'Mismatch in shape: grad_output has a shape of '
+                f'{gradient.shape} and output has a shape of {self.shape}.'
+            )
         
         # topological order of the children in the graph
         topo = []
@@ -638,11 +651,13 @@ class Tensor:
             raise ValueError(error_message)
 
         # extend target_shape to match length of array_shape
-        extended_shape = [1] * len_diff + target_shape if len_diff > 0 else target_shape
+        extended_shape = ([1] * len_diff + target_shape if len_diff > 0 
+                          else target_shape)
 
         # add broadcasted dimensions to dims_to_sum
         dims_to_sum = []
-        for dim, (n_input, n_shape) in enumerate(zip(array_shape, extended_shape)):
+        for dim, (n_input, n_shape) in enumerate(
+            zip(array_shape, extended_shape)):
             if n_shape != n_input and n_shape != 1:
                 raise ValueError(error_message)
             elif n_shape != n_input and n_shape == 1:
@@ -655,7 +670,6 @@ class Tensor:
         array = np.squeeze(array, axis=tuple(range(len_diff)))
 
         return Tensor(array)
-    
     
 def zeros(*shape, requires_grad=False):
     return Tensor(np.zeros(shape), requires_grad=requires_grad)

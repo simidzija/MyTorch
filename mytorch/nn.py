@@ -8,7 +8,8 @@ mirrors the structure and functionality of PyTorch's torch.nn module.
 Classes:
     Module: An abstract base class for all neural network modules, providing 
         fundamental functionalities like training mode setting, parameter and 
-        module registration, recursive parameter retrival, and implementing the __call__ method. 
+        module registration, recursive parameter retrival, and implementing the 
+        __call__ method. 
     Parameter: Wraps a Tensor and marks it as a parameter to be optimized within
         a model.
     Linear: Implements a linear, fully connected layer.
@@ -272,7 +273,8 @@ class Sequential(Module):
 class CrossEntropyLoss(Module):
     """
     Implements the cross-entropy loss, a common loss function for 
-    classification tasks. It measures the discrepancy between the predicted probabilities (input) and the true distribution (target).
+    classification tasks. It measures the discrepancy between the predicted 
+    probabilities (input) and the true distribution (target).
 
     Note: the argument 'input' should be a batch of unnormalized 
     log-probabilities (logits), and the argument 'target' should be a batch of 
@@ -295,7 +297,8 @@ class CrossEntropyLoss(Module):
     
 class Flatten(Module):
     """
-    A module that flattens prescribed dimensions of a tensor. Useful for transforming 2D images arrays into a 1D vector form.
+    A module that flattens prescribed dimensions of a tensor. Useful for 
+    transforming 2D images arrays into a 1D vector form.
 
     Attributes:
         start_dim (int): The first dimension to flatten (default is 1).

@@ -8,7 +8,6 @@ import torch
 from mytorch import nn
 from mytorch.engine import Tensor
 
-
 def test_Linear():
 
     my_layer0 = nn.Linear(2, 3)
@@ -225,6 +224,7 @@ def test_Sequential():
     assert np.isclose(my_layer4.bias.grad.data, 
                     py_layer4.bias.grad.numpy()).all()
 
+
 def test_CrossEntropyLoss():
 
     my_loss = nn.CrossEntropyLoss()
@@ -261,6 +261,7 @@ def test_CrossEntropyLoss():
     tx2.backward(t5)
     assert np.isclose(ex2.data, tx2.detach().numpy()).all()
     assert np.isclose(e2.grad.data, t2.grad.numpy()).all()
+
 
 def test_Flatten():
 

@@ -84,7 +84,8 @@ class Optimizer(ABC):
             >>> optimizer = MyOptimizer(model.parameters(), lr=0.01)
 
     Note:
-        The Optimizer class is designed to be subclassed with specific implementations of the step() method.
+        The Optimizer class is designed to be subclassed with specific 
+        implementations of the step() method.
     """
 
     def __init__(self, params, defaults):
